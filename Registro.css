@@ -25,10 +25,11 @@
 }
 
 .u-section-1 .u-btn-1 {
-  width: 70%;
+  width: 50%;
   font-weight: 700;
   font-size: 1.25rem;
-  padding: 10px 0;
+  padding: 10px 0px;
+  
 }
 
 .u-section-1 .u-btn-2 {
