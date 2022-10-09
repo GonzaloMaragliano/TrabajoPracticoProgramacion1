@@ -24,7 +24,7 @@ class ControladorSesion
     public function crearUsuario($nombre_usuario, $clave)
     {
         $repoUsuario = new RepositorioUsuario();
-        $usuario = new Usuario($nombre_usuario);
+        $usuario = new Usuario($nombre_usuario, $clave);
         $id = $repoUsuario->guardar($usuario, $clave);
 
         if($id === false) {
@@ -45,10 +45,10 @@ class ControladorSesion
         $repoFactura = new RepositorioFactura();
         $repoFactura.bajaFactura($factura, $usuario);
     }
-    public function verFactura($_POST['NombreCliente']){
+    /*public function verFactura($_POST['NombreCliente']){
         $repoFactura = new RepositorioFactura();
         $repoFactura.verFacturas();
-    }
+    }*/
     public function bajaUsuario($usuario){
         $repoUsuario = new RepositorioUsuario();
         $repoUsuario.bajaUsuario($usuario);
