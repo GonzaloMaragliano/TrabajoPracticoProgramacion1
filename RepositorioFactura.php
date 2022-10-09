@@ -125,6 +125,21 @@
             }
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // LLamada a la base de datos para ver las facturas.
 
         public function verFacturas(){
