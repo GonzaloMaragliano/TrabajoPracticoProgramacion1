@@ -144,10 +144,30 @@
 
         // LLamada a la base de datos para ver las facturas.
 
-        public function verFacturas(){
+        public function verFacturas($nombre_cliente){
 
-            $q = "SELECCIONAR TODAS LAS FACTURAS DE LA BASE DE DATOS";
+            $q = "SELECT * FROM facturas WHERE cliente = ?";
 
+            $consulta = self::$conexion->prepare($q);
+            if(!$consulta){
+                echo "Fallo la preparacion de la consulta:  ".self::$conexion->errno."  ERROR: ".self::$conexion->error;
+            }
+
+            //$nombre_cliente = "%".$nombre_cliente."%";
+            if(!$consulta->bind_param("s", $nombre_cliente)){
+                echo "Fallo la vinculacion de parametros de la consulta:  ".self::$conexion->errno."  ERROR: ".self::$conexion->error;
+            }
+
+            if(!$consulta->execute()){
+                echo "Fallo la ejecucion de la consulta:  ".self::$conexion->errno."  ERROR: ".self::$conexion->error;
+            }
+
+            // Obtengo resultado de la consulta
+            $resultado = $consulta->query($q);
+
+            print_r($resultado);
+
+            $consulta->close();
         }
 
 
