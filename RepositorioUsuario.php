@@ -57,5 +57,17 @@ class RepositorioUsuario
             return false;
         }
     }
+
+    public function bajaUsuario($nombre_usuario)
+    {
+        $q = "DELETE FROM usuarios WHERE usuario = ?";
+        $query = self::$conexion->prepare($q);
+        $query->bind_param("s", $nombre_usuario);
+        if($query->execute()){
+            return true;
+        } else{
+            return false;
+        }
+    }
 }
 ?>
