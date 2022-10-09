@@ -45,7 +45,7 @@
                 </div>
               </form>
             </div>
-            <a href="Registro.html" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-btn u-button-style u-none u-text-palette-1-base u-btn-2">¿No tiene cuenta? Registrese</a>
+            <a href="Registro.php" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-btn u-button-style u-none u-text-palette-1-base u-btn-2">¿No tiene cuenta? Registrese</a>
           </div>
         </div>
       </div>
