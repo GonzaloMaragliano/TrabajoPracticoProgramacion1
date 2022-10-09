@@ -146,28 +146,21 @@
 
         public function verFacturas($nombre_cliente){
 
-            $q = "SELECT * FROM facturas WHERE cliente = ?";
+            $q = "SELECT * FROM facturas WHERE cliente LIKE '%".$nombre_cliente."%'";
 
-            $consulta = self::$conexion->prepare($q);
-            if(!$consulta){
-                echo "Fallo la preparacion de la consulta:  ".self::$conexion->errno."  ERROR: ".self::$conexion->error;
-            }
-
-            //$nombre_cliente = "%".$nombre_cliente."%";
-            if(!$consulta->bind_param("s", $nombre_cliente)){
-                echo "Fallo la vinculacion de parametros de la consulta:  ".self::$conexion->errno."  ERROR: ".self::$conexion->error;
-            }
-
-            if(!$consulta->execute()){
-                echo "Fallo la ejecucion de la consulta:  ".self::$conexion->errno."  ERROR: ".self::$conexion->error;
-            }
 
             // Obtengo resultado de la consulta
-            $resultado = $consulta->query($q);
+            $resultado = self::$conexion->query($q);
+            
+            while($fila = $resultado->fetch_assoc()){
 
-            print_r($resultado);
+                echo $fila['cliente']."<br>";
+                /*foreach ($fila as $f) {
+                    echo $f . "<br>";
+                }*/
+            }
 
-            $consulta->close();
+            //$consulta->close();
         }
 
 
