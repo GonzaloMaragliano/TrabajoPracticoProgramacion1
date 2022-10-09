@@ -123,6 +123,8 @@
             if(!$sentencia->execute()){
                 echo "Fallo la ejecucion de la consulta:  ".self::$conexion->errno."  ERROR: ".self::$conexion->error;
             }
+
+            $sentencia->close()
         }
 
 
