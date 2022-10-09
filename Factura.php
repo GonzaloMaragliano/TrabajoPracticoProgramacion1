@@ -14,12 +14,11 @@
 
         // Constructor de la clase Factura.
 
-        public function __construct($nro_factura, $cliente, $fecha_alta, $fecha_facturacion, $fecha_baja, $bultos, $observacion=null){
+        public function __construct($nro_factura, $cliente, $fecha_alta, $fecha_facturacion, $bultos, $observacion=null){
             $this->nro_factura = $nro_factura;
             $this->cliente = $cliente;
             $this->fecha_alta = $fecha_alta;
             $this->fecha_facturacion = $fecha_facturacion;
-            $this->fecha_baja = $fecha_baja;
             $this->bultos = $bultos;
             $this->observacion = $observacion;
         }
