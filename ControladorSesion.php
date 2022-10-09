@@ -21,6 +21,22 @@ class ControladorSesion
         }
     }
 
+    public function crearUsuario($nombre_usuario, $clave)
+    {
+        $repoUsuario = new RepositorioUsuario();
+        $usuario = new Usuario($nombre_usuario);
+        $id = $repoUsuario->guardar($usuario, $clave);
+
+        if($id === false) {
+            return [false, "Error al crear el usuario"];
+        } else {
+            $usuario->setId($id);
+            session_start();
+            $_SESSION['usuario'] = serialize($usuario);
+            return[true, "Usuario creado correctamente"];
+        }
+    }
+
     public function altaFactura($factura, $usuario){
         $repoFactura = new RepositorioFactura();
         $repoFactura.altaFactura($factura, $usuario);
