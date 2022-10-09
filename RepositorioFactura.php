@@ -49,6 +49,7 @@
             $f_facturacion = $factura->getFechaFacturacion();
             $bultos = $factura->getBultos();
             $obs = $factura->getObservacion();
+            $usuario_id = $usuario->getId();
 
             $q = "INSERT INTO facturas (nro_factura, cliente, fecha_facturacion, fecha_carga, bultos, observacion, usuario_alta) VALUES(?, ?, ?, ?, ?, ?, ?)";
             
@@ -56,7 +57,7 @@
                 echo "Fallo la preparacion de la consulta:  ".self::$conexion->errno."  ERROR: ".self::$conexion->error;
             }
 
-            if(!$sentencia->bind_param("sssssis", $nro_factura, $cliente, $f_alta, $f_facturacion, $bultos, $obs)){
+            if(!$sentencia->bind_param("sssssii", $nro_factura, $cliente, $f_alta, $f_facturacion, $bultos, $obs, $usuario_id)){
                 echo "Fallo la vinculacion de parametros de la consulta:  ".self::$conexion->errno."  ERROR: ".self::$conexion->error;
             }
             
@@ -108,9 +109,38 @@
 
         public function bajaFactura($factura, $usuario){
 
-            $q = "ACTUALIZAR DATOS DE LA FACTURA A LA BASE DE DATOS";
+            $q = "UPDATE facturas SET usuario_alta = ?";
 
+            if(!($sentencia = self::$conexion->prepare($q))){
+                echo "Fallo la preparacion de la consulta:  ".self::$conexion->errno."  ERROR: ".self::$conexion->error;
+            }
+
+
+            if(!$sentencia->bind_param("i", $usuario->getId())){
+                echo "Fallo la vinculacion de parametros de la consulta:  ".self::$conexion->errno."  ERROR: ".self::$conexion->error;
+            }
+
+            if(!$sentencia->execute()){
+                echo "Fallo la ejecucion de la consulta:  ".self::$conexion->errno."  ERROR: ".self::$conexion->error;
+            }
+
+            $sentencia->close()
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // LLamada a la base de datos para ver las facturas.
 
