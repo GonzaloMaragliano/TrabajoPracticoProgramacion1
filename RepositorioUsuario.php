@@ -42,5 +42,20 @@ class RepositorioUsuario
         }
         return false;
     }
+
+    public function guardar(Usuario $usuario, $clave)
+    {
+        $q = "INSERT INTO usuarios (usuario, clave)";
+        $q.= "VALUES(?,?)";
+        $query = self::$conexion->prepare($q);
+        $nombre_usuario = $usuario->getUsuario();
+        $clave_encriptada = password_hash($clave, PASSWORD_DEFAULT);
+        $query->bind_param("ss", $nombre_usuario, $clave_encriptada);
+        if($query->execute()){
+            return self::$conexion->insert_id;
+        } else{
+            return false;
+        }
+    }
 }
 ?>
