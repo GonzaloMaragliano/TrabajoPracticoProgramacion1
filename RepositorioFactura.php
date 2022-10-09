@@ -52,8 +52,9 @@
             $usuario_id = $usuario->getId();
 
             $q = "INSERT INTO facturas (nro_factura, cliente, fecha_facturacion, fecha_carga, bultos, observacion, usuario_alta) VALUES(?, ?, ?, ?, ?, ?, ?)";
-            
-            if(!($setencia = self::$conexion->prepare($q))){
+
+            $sentencia = self::$conexion->prepare($q);
+            if(!$sentencia){
                 echo "Fallo la preparacion de la consulta:  ".self::$conexion->errno."  ERROR: ".self::$conexion->error;
             }
 
@@ -109,14 +110,14 @@
 
         public function bajaFactura($factura, $usuario){
 
-            $q = "UPDATE facturas SET usuario_alta = ?";
+            $q = "UPDATE facturas SET usuario_baja = ?";
 
             if(!($sentencia = self::$conexion->prepare($q))){
                 echo "Fallo la preparacion de la consulta:  ".self::$conexion->errno."  ERROR: ".self::$conexion->error;
             }
 
-
-            if(!$sentencia->bind_param("i", $usuario->getId())){
+            $id = $usuario->getId();
+            if(!$sentencia->bind_param("i", $id)){
                 echo "Fallo la vinculacion de parametros de la consulta:  ".self::$conexion->errno."  ERROR: ".self::$conexion->error;
             }
 
@@ -124,9 +125,8 @@
                 echo "Fallo la ejecucion de la consulta:  ".self::$conexion->errno."  ERROR: ".self::$conexion->error;
             }
 
-            $sentencia->close()
+            $sentencia->close();
         }
-
 
 
 
@@ -152,7 +152,7 @@
 
 
 
-    }
+}
 
 
 ?>
