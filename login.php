@@ -8,7 +8,7 @@ else{
     $cs = new ControladorSesion();
     $login = $cs->login($_POST['usuario'], $_POST['clave']);
     if ($login[0] === true) {
-        $redirigir = 'Main.html';
+        $redirigir = 'Main.php';
     } else{
         $redirigir = 'index.html?mensaje= ' . $login[1];
     }
