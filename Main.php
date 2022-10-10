@@ -23,7 +23,8 @@
     <section class="u-align-center u-clearfix section1" id="sec-df0b">
       <div class="u-clearfix u-sheet u-sheet-1">
         <a href="Inicio.php" class="u-border-none u-btn u-button-style u-palette-2-base u-btn-1">Cerrar Sesión</a>
-
+          <a href="Inicio.php" class="u-border-none u-btn u-button-style u-palette-2-base u-btn-2">Baja Usuario</a>
+          <a href="Inicio.php" class="u-border-none u-btn u-button-style u-btn-1">Baja Usuario</a>
         <?php
         session_start();
         session_destroy();
