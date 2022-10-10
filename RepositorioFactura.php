@@ -1,5 +1,4 @@
 <?php
-
     // Objetos requeridos para llamada al repositorio.
 
     require_once 'Factura.php';

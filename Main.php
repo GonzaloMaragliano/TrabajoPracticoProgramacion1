@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="es"><head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,14 +24,7 @@
       </div></header>
     <section class="u-align-center u-clearfix section1" id="sec-df0b">
       <div class="u-clearfix u-sheet u-sheet-1">
-        <a href="Inicio.php" class="u-border-none u-btn u-button-style u-palette-2-base u-btn-1">Cerrar Sesión</a>
-
-        <?php
-        session_start();
-        session_destroy();
-        header('Location:Inicio.php?mensaje=Sesión cerrada con exito');
-        ?>
-
+        <a href="logout.php" class="u-border-none u-btn u-button-style u-palette-2-base u-btn-1">Cerrar Sesión</a>
         <div class="u-expanded-width u-list u-list-1">
           <div class="u-repeater u-repeater-1">
             <div class="u-align-center u-border-2 u-border-grey-75 u-container-style u-list-item u-repeater-item u-list-item-1">
