@@ -18,7 +18,7 @@
       <div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-text u-text-black u-text-default u-text-1">Buscar factura</p>
         <div class="u-align-center u-border-2 u-border-grey-75 u-form u-form-1">
-          <form action="https://forms.nicepagesrv.com/Form/Process" class="u-clearfix u-form-spacing-14 u-form-vertical u-inner-form" style="padding: 34px;" source="email" name="form">
+          <form action="formBuscarFc.php" method="POST" class="u-clearfix u-form-spacing-14 u-form-vertical u-inner-form" style="padding: 34px;" source="email" name="form">
           
             <div class="u-form-group u-label-left">
               <label for="email-6797" class="u-custom-font u-font-arial u-label u-spacing-7 u-text-black u-label-2">Nombre Cliente</label>
