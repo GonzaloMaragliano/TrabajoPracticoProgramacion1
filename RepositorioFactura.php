@@ -1,5 +1,4 @@
 <?php
-
     // Objetos requeridos para llamada al repositorio.
 
     require_once 'Factura.php';
@@ -144,10 +143,23 @@
 
         // LLamada a la base de datos para ver las facturas.
 
-        public function verFacturas(){
+        public function verFacturas($nombre_cliente){
 
-            $q = "SELECCIONAR TODAS LAS FACTURAS DE LA BASE DE DATOS";
+            $q = "SELECT * FROM facturas WHERE cliente LIKE '%".$nombre_cliente."%'";
 
+
+            // Obtengo resultado de la consulta
+            $resultado = self::$conexion->query($q);
+            
+            while($fila = $resultado->fetch_assoc()){
+
+                echo $fila['cliente']."<br>";
+                /*foreach ($fila as $f) {
+                    echo $f . "<br>";
+                }*/
+            }
+
+            //$consulta->close();
         }
 
 

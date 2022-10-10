@@ -1,3 +1,16 @@
+<?php
+require_once 'ControladorSesion.php';
+if (isset($_POST['usuario']) && isset($_POST['clave'])) {
+    $cs = new ControladorSesion();
+    $result = $cs->crearUsuario($_POST['usuario'], $_POST['clave']);
+    if( $result[0] === true ) {
+        $redirigir = 'Main.php';
+    } else {
+        $redirigir = 'Registro.php?mensaje='.$result[1];
+    }
+    header('Location: ' . $redirigir);
+}
+?>
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="es"><head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,18 +37,18 @@
     <section class="u-align-center u-clearfix u-section-1" id="sec-ce2e">
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-border-2 u-border-grey-75 u-form u-form-1">
-          <form action="https://forms.nicepagesrv.com/Form/Process" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;" source="email" name="form">
+          <form action="Registro.php" method="POST">
             <div class="u-form-group u-form-name u-label-top">
               <label for="name-6797" class="u-label">Usuario</label>
-              <input type="text" placeholder="Usuario" id="name-6797" name="user" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1" required="" maxlength="10">
+              <input type="text" placeholder="Usuario" id="name-6797" name="usuario" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1" required="" maxlength="10">
             </div>
             <div class="u-form-group u-label-top">
               <label for="message-6797" class="u-label">Contraseña</label>
-              <input placeholder="Contraseña" rows="4" cols="50" id="message-6797" name="password" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-3" required="required" type="password" value="">
+              <input placeholder="Contraseña" rows="4" cols="50" id="message-6797" name="clave" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-3" required="required" type="password" value="">
             </div>
             <div class="u-form-group u-label-top">
               <label for="text-ec0d" class="u-label">Repita contraeña</label>
-              <input type="password" placeholder="Repita contraseña" id="text-ec0d" name="password2" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-4" required="required">
+              <input type="password" placeholder="Repita contraseña" id="text-ec0d" name="clave2" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-4" required="required">
             </div>
             <div class="u-form-group u-form-submit u-label-top">
               <input type="submit" class="u-btn u-btn-submit u-button-style u-btn-1" value="Confirmar" >
