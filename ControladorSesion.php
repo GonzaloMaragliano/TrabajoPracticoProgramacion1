@@ -45,7 +45,7 @@ class ControladorSesion
         $repoFactura = new RepositorioFactura();
         $repoFactura->bajaFactura($factura, $usuario);
     }
-    public function verFactura($_POST['NombreCliente']){
+    public function verFactura($nombre_cliente){
         $repoFactura = new RepositorioFactura();
         $repoFactura->verFacturas($_POST['NombreCliente']);
     }

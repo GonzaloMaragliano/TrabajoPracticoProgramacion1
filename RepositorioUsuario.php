@@ -58,10 +58,11 @@ class RepositorioUsuario
         }
     }
 
-    public function bajaUsuario($nombre_usuario)
+    public function bajaUsuario($usuario)
     {
         $q = "DELETE FROM usuarios WHERE usuario = ?";
         $query = self::$conexion->prepare($q);
+        $nombre_usuario = $usuario->getUsuario();
         $query->bind_param("s", $nombre_usuario);
         if($query->execute()){
             return true;
