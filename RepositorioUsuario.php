@@ -15,7 +15,7 @@ class RepositorioUsuario
                 $credenciales['servidor'],
                 $credenciales['usuario'],
                 $credenciales['clave'],
-                $credenciales['base_de_datos']);
+                $credenciales['BD']);
             }
             catch(Exception $e){
                 $e = 'Error de conexion: ' .self::$conexion->connect_error;
@@ -31,13 +31,13 @@ class RepositorioUsuario
         $q = "SELECT id, clave FROM usuarios WHERE usuario = ?";
         $query = self::$conexion->prepare($q);
         $query->bind_param("s", $nombre_usuario);
-
+        
         if ($query->execute()){
             $query->bind_result($id, $clave_encriptada);
             if($query->fetch()){
                 if(password_verify($clave, $clave_encriptada)){
-                    return new Usuario($nombre_usuario, $id);
-                }
+                    return new Usuario($nombre_usuario, $clave, $id);
+                } 
             }
         }
         return false;
@@ -49,7 +49,7 @@ class RepositorioUsuario
         $q.= "VALUES(?,?)";
         $query = self::$conexion->prepare($q);
         $nombre_usuario = $usuario->getUsuario();
-        $clave_encriptada = password_hash($clave, PASSWORD_DEFAULT);
+        $clave_encriptada = password_hash($clave, PASSWORD_BCRYPT);
         $query->bind_param("ss", $nombre_usuario, $clave_encriptada);
         if($query->execute()){
             return self::$conexion->insert_id;

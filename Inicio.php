@@ -22,13 +22,19 @@
           
         <div class="u-container-layout u-container-layout-1">
             <h1 class="u-custom-font u-text u-text-default u-text-1">BIENVENIDO </h1>
+
+
             <?php
             if (isset( $_GET [ 'mensaje' ])) {
                 echo  '<div id="mensaje" class="alert alert-primary text-center">
-                    <p>' . $_GET [ 'mensaje' ]. '</p></div>' ;
+                    <p>' . $_GET [ 'mensaje' ] . '</p></div>' ;
             }
             ?>
+
+
             <div class="u-form u-login-control u-form-1">
+
+
               <form action="login.php" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 0px;" redirect="true">
                 <div class="u-form-group u-form-name u-label-top">
                   <label for="username-a30d" class="u-label u-label-1">Usuario *</label>
@@ -44,11 +50,12 @@
                   <label for="checkbox-a30d" class="u-label u-label-3">Recordarme</label>
                 </div>
                 <div class="u-align-left u-form-group u-form-submit u-label-top">
-                  <input type="submit" value="submit" class="u-form-control-hidden">
-                  <a class="u-border-none u-btn u-btn-submit u-button-style u-palette-1-base u-btn-1">Inicio Sesión<br>
-                  </a>
+                  <input type="submit" value="Inicio Sesión" class="u-border-none u-btn u-btn-submit u-button-style u-palette-1-base u-btn-1">
                 </div>
               </form>
+
+
+
             </div>
             <a href="Registro.php" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-btn u-button-style u-none u-text-palette-1-base u-btn-2">¿No tiene cuenta? Registrese</a>
           </div>

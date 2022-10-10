@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="es"><head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +19,7 @@
       <div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-text u-text-black u-text-default u-text-1">Alta de factura</p>
         <div class="u-align-center u-border-2 u-border-grey-75 u-form u-form-1">
-          <form class="u-clearfix u-form-spacing-14 u-form-vertical u-inner-form" style="padding: 34px;" source="email" name="form">
+          <form action = "formAltaFc.php" method = "POST" class="u-clearfix u-form-spacing-14 u-form-vertical u-inner-form" style="padding: 34px;" source="email" name="form">
             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-left">
               <label for="number" class="u-custom-font u-font-arial u-label u-spacing-7 u-text-black u-label-1">N° de Factura</label>
               <input type="number" min="0" id="number" name="nroFactura" class="u-border-1 u-border-grey-30 u-grey-5 u-input u-input-rectangle u-radius-6 u-text-black u-input-1" required="">
@@ -48,7 +50,7 @@
               <div class="u-btn-submit-container">
                 <div class="u-align-right u-btn-submit-container">
                   <input type="reset" class="u-btn u-btn-submit u-button-style u-btn-1" value="Borrar">
-                  <input  type="submit" class="u-btn u-btn-submit u-button-style u-btn-1" value="Confirmar">
+                  <input type="submit" class="u-btn u-btn-submit u-button-style u-btn-1" value="Confirmar">
                 </div>
               </div>
             </div>
