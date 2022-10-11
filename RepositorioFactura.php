@@ -48,7 +48,7 @@
             $f_facturacion = $factura->getFechaFacturacion();
             $bultos = $factura->getBultos();
             $obs = $factura->getObservacion();
-            $usuario_id = $usuario->getId();
+            $usuario_id = $usuario->getId();    
 
             $q = "INSERT INTO facturas (nro_factura, cliente, fecha_facturacion, fecha_carga, bultos, observacion, usuario_alta) VALUES(?, ?, ?, ?, ?, ?, ?)";
 
@@ -144,7 +144,7 @@
         // LLamada a la base de datos para ver las facturas.
 
         public function verFacturas($nombre_cliente){
-
+            $listado_facturas = [];
             $q = "SELECT * FROM facturas WHERE cliente LIKE '%".$nombre_cliente."%'";
 
 
@@ -152,14 +152,15 @@
             $resultado = self::$conexion->query($q);
             
             while($fila = $resultado->fetch_assoc()){
+                $fc = new Factura($fila['nro_factura'], $fila['cliente'], $fila['fecha_carga'], $fila['fecha_facturacion'], $fila['bultos'], $fila['observacion']);
+                
+               // echo $$fila['nro_factura']."<br>".$fila['cliente']."<br>".$fila['fecha_carga']."<br>".$fila['fecha_facturacion']."<br>".$fila['bultos']."<br>".$fila['observacion'];
+                
+                array_unshift($listado_facturas, $fc);
 
-                echo $fila['cliente']."<br>";
-                /*foreach ($fila as $f) {
-                    echo $f . "<br>";
-                }*/
             }
 
-            //$consulta->close();
+            return $listado_facturas;
         }
 
 
