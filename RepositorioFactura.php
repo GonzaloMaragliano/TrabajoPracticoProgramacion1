@@ -57,7 +57,7 @@
                 echo "Fallo la preparacion de la consulta:  ".self::$conexion->errno."  ERROR: ".self::$conexion->error;
             }
 
-            if(!$sentencia->bind_param("sssssii", $nro_factura, $cliente, $f_alta, $f_facturacion, $bultos, $obs, $usuario_id)){
+            if(!$sentencia->bind_param("ssssisi", $nro_factura, $cliente, $f_alta, $f_facturacion, $bultos, $obs, $usuario_id)){
                 echo "Fallo la vinculacion de parametros de la consulta:  ".self::$conexion->errno."  ERROR: ".self::$conexion->error;
             }
             
@@ -160,9 +160,32 @@
 
             }
 
+            
             return $listado_facturas;
         }
 
+
+
+        // LLamada a la base de datos para ver una factura.
+
+        public function verFactura($nro_factura){
+
+            $q = "SELECT * FROM facturas WHERE nro_factura LIKE '".$nro_factura."'";
+        
+        
+            // Obtengo resultado de la consulta
+            $resultado = self::$conexion->query($q);
+            
+            $fc = null;
+            if($fila = $resultado->fetch_assoc()){
+                $fc = new Factura($fila['nro_factura'], $fila['cliente'], $fila['fecha_carga'], $fila['fecha_facturacion'], $fila['bultos'], $fila['observacion']);
+                
+               // echo $$fila['nro_factura']."<br>".$fila['cliente']."<br>".$fila['fecha_carga']."<br>".$fila['fecha_facturacion']."<br>".$fila['bultos']."<br>".$fila['observacion'];
+               return $fc;   
+            }
+            
+            return null;
+        }
 
 
 }
