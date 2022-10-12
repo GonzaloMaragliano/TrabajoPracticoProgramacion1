@@ -21,8 +21,8 @@
           <form action="formBuscarFc.php" method="POST" class="u-clearfix u-form-spacing-14 u-form-vertical u-inner-form" style="padding: 34px;" source="email" name="form">
           
             <div class="u-form-group u-label-left">
-              <label for="email-6797" class="u-custom-font u-font-arial u-label u-spacing-7 u-text-black u-label-2">Nombre Cliente</label>
-              <input type="text" id="email-6797" name="NombreCliente" class="u-border-1 u-border-grey-30 u-grey-5 u-input u-input-rectangle u-radius-6 u-text-black u-input-2" required="required">
+              <label for="number" class="u-custom-font u-font-arial u-label u-spacing-7 u-text-black u-label-2">Número de factura</label>
+              <input type="number" min="0" id="nroFca" name="nroFca" class="u-border-1 u-border-grey-30 u-grey-5 u-input u-input-rectangle u-radius-6 u-text-black u-input-2" required="required">
             </div>
             <div class="u-form-group u-form-submit u-label-left">
               <label class="u-label u-spacing-1 u-text-black u-label-5"></label>
