@@ -109,7 +109,9 @@
 
         public function bajaFactura($factura, $usuario){
 
-            $q = "UPDATE facturas SET usuario_baja = ?";
+            $nro_factura = $factura->getNroFactura();
+
+            $q = "UPDATE facturas SET usuario_baja = ? WHERE nro_factura = ".$nro_factura."";
 
             if(!($sentencia = self::$conexion->prepare($q))){
                 echo "Fallo la preparacion de la consulta:  ".self::$conexion->errno."  ERROR: ".self::$conexion->error;
@@ -166,6 +168,20 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
         // LLamada a la base de datos para ver una factura.
 
         public function verFactura($nro_factura){
