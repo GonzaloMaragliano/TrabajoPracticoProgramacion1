@@ -3,5 +3,6 @@ session_start();
 require_once 'ControladorSesion.php';
 
 $cs = new ControladorSesion();
- 
-$cs->bajaFactura($_POST['NombreCliente'], $_SESSION['usuario']=unserialize($_SESSION['usuario']));
+$factura = $cs->verFactura($_POST['nroFca']);
+
+$cs->bajaFactura($factura, $_SESSION['usuario']=unserialize($_SESSION['usuario']));
