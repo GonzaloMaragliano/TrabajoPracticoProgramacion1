@@ -111,7 +111,7 @@
 
             $nro_factura = $factura->getNroFactura();
 
-            $q = "UPDATE facturas SET usuario_baja = ? WHERE nro_factura = ".$nro_factura."";
+            $q = "UPDATE facturas SET usuario_baja = ? WHERE nro_factura = ".$nro_factura.""; 
 
             if(!($sentencia = self::$conexion->prepare($q))){
                 echo "Fallo la preparacion de la consulta:  ".self::$conexion->errno."  ERROR: ".self::$conexion->error;
