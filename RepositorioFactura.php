@@ -126,9 +126,9 @@
                 echo "Fallo la ejecucion de la consulta:  ".self::$conexion->errno."  ERROR: ".self::$conexion->error;
             }
 
-            $sentencia->close();
+            $sentencia->close(); 
         }
-
+ 
 
 
 
