@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php session_start(); include_once 'RepositorioFactura.php'; ?>
 
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="es"><head>
@@ -36,15 +36,17 @@
               
               <div class="u-btn-submit-container">
                 <div class="u-align-right u-btn-submit-container">
-                  <input type="submit" class="u-btn u-btn-submit u-button-style u-btn-1" value="Borrar">
-                  <input  type="search" class="u-btn u-btn-submit u-button-style u-btn-1" value="Buscar">
+                <input type="submit" class="u-btn u-btn-submit u-button-style u-btn-1" value="Borrar">
+
                   </a>
                 </div>
               </div>
             </div>
           </form>
 
-
+          <form action="bajaFca.php" method="POST">
+            <input type="submit" class="u-btn u-btn-submit u-button-style u-btn-1" value="Buscar" name="true">
+          </form>
 
         </div>
         </a>
@@ -53,20 +55,48 @@
     <section class="u-align-center u-clearfix u-white u-section-2" id="sec-f29f">
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-expanded-width u-table u-table-responsive u-table-1">
-          <table class="u-table-entity u-table-entity-1">
+        <?php 
+          if (isset($_POST['true'])) {
+          
+            $repoFC = new RepositorioFactura();
+            $full_list = $repoFC->verFacturasAllUs();
+          
+            echo '<table class="u-table-entity u-table-entity-1">
             <tbody class="u-table-body">
+                <td class="u-border-3 u-border-grey-30 u-table-cell u-table-cell-1">ID Usuario</td>
+                <td class="u-border-3 u-border-grey-30 u-table-cell u-table-cell-1">Usuario Alta</td>
                 <td class="u-border-3 u-border-grey-30 u-table-cell u-table-cell-1">N° de Factura</td>
                 <td class="u-border-3 u-border-grey-30 u-table-cell u-table-cell-2">Nombre del cliente</td>
-                <td class="u-border-3 u-border-grey-30 u-table-cell u-table-cell-3">Fecha de carga</td>
-                <td class="u-border-3 u-border-grey-30 u-table-cell u-table-cell-4">Fecha de factura</td>
-              </tr>
-                <td class="u-border-3 u-border-grey-30 u-table-cell">Columna 1</td>
-                <td class="u-border-3 u-border-grey-30 u-table-cell">Description</td>
-                <td class="u-border-3 u-border-grey-30 u-table-cell">Description</td>
-                <td class="u-border-3 u-border-grey-30 u-table-cell">Description</td>
-              </tr>
-            </tbody>
-          </table>
+                <td class="u-border-3 u-border-grey-30 u-table-cell u-table-cell-3">Fecha de facturacion</td>
+                <td class="u-border-3 u-border-grey-30 u-table-cell u-table-cell-4">Fecha de carga</td>
+                <td class="u-border-3 u-border-grey-30 u-table-cell u-table-cell-4">Cantidad de bultos</td>
+                <td class="u-border-3 u-border-grey-30 u-table-cell u-table-cell-4">Observacion</td>';
+          
+            foreach($full_list as $l_full){
+              foreach($l_full as $obj){
+                
+                if(is_a($obj, 'Usuario')){
+                  echo '<tr><td class="u-border-3 u-border-grey-30 u-table-cell">'.$obj->getId().'</td>
+                  <td class="u-border-3 u-border-grey-30 u-table-cell">'.$obj->getUsuario().'</td>';
+                }
+                else{
+                  if(is_a($obj, 'Factura')){
+                    echo '<td class="u-border-3 u-border-grey-30 u-table-cell">'.$obj->getNroFactura().'</td>
+                    <td class="u-border-3 u-border-grey-30 u-table-cell">'.$obj->getCliente().'</td>
+                    <td class="u-border-3 u-border-grey-30 u-table-cell">'.$obj->getFecha_Alta().'</td>
+                    <td class="u-border-3 u-border-grey-30 u-table-cell">'.$obj->getFechaFacturacion().'</td>
+                    <td class="u-border-3 u-border-grey-30 u-table-cell">'.$obj->getBultos().'</td>
+                    <td class="u-border-3 u-border-grey-30 u-table-cell">'.$obj->getObservacion().'</td></tr>';
+                  }
+                }
+              }
+            }
+          
+            echo '
+              </tbody>
+            </table>';
+          }
+        ?>
         </div>
         <a href="Main.php" class="u-border-none u-btn u-button-style u-palette-3-base u-btn-1"><span class="u-file-icon u-icon u-text-white u-icon-1"><img src="images/1946488-2e7956ab.png" alt=""></span>&nbsp;
         </a>
