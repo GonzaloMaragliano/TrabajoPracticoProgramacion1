@@ -88,23 +88,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // LLamada a la base de datos para dar de baja una factura por un usuario.
 
         public function bajaFactura($factura, $usuario){
@@ -143,7 +126,7 @@
 
 
 
-        // LLamada a la base de datos para ver las facturas.
+        // LLamada a la base de datos para ver las facturas pasando un nombre de cliente como param.
 
         public function verFacturas($nombre_cliente){
             $listado_facturas = [];
@@ -178,9 +161,6 @@
 
 
 
-
-
-
         
         // LLamada a la base de datos para ver una factura.
 
@@ -188,14 +168,14 @@
 
             $q = "SELECT * FROM facturas WHERE nro_factura LIKE '".$nro_factura."'";
         
-        
             // Obtengo resultado de la consulta
             $resultado = self::$conexion->query($q);
             
             $fc = null;
+
             if($fila = $resultado->fetch_assoc()){
                 $fc = new Factura($fila['nro_factura'], $fila['cliente'], $fila['fecha_carga'], $fila['fecha_facturacion'], $fila['bultos'], $fila['observacion']);
-                
+
                // echo $$fila['nro_factura']."<br>".$fila['cliente']."<br>".$fila['fecha_carga']."<br>".$fila['fecha_facturacion']."<br>".$fila['bultos']."<br>".$fila['observacion'];
                return $fc;   
             }
@@ -204,6 +184,57 @@
         }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // LLamada a la base de datos para ver todas las facturas asociadas a sus movimientos.
+
+        public function verFacturasAllUs(){
+
+            $listado_usuario_factura = [null, null];
+            $listado_final = [];
+
+            $q = "SELECT * FROM usuarios us RIGHT JOIN facturas fc ON us.id = fc.usuario_alta WHERE fc.nro_factura IS NOT NULL";
+
+
+            // Obtengo resultado de la consulta
+            $resultado = self::$conexion->query($q);
+            
+            /*while($fila = $resultado->fetch_assoc()){
+                echo "<pre>";
+                print_r($fila);
+                echo "</pre>";
+            }*/
+
+            while($fila = $resultado->fetch_assoc()){
+                $fc = new Factura($fila['nro_factura'], $fila['cliente'], $fila['fecha_carga'], $fila['fecha_facturacion'], $fila['bultos'], $fila['observacion']);
+                $usuario = new Usuario($fila['usuario'], $fila['clave'], $fila['id']);
+
+
+                $listado_usuario_factura[0] = $usuario;
+                $listado_usuario_factura[1] = $fc;
+                array_unshift($listado_final, $listado_usuario_factura);
+            }
+
+            
+            return $listado_final;
+        }
 }
 
 

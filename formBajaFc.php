@@ -7,6 +7,7 @@ $cs = new ControladorSesion();
 $repo_Factura = new RepositorioFactura();
 
 $factura = $repo_Factura->verFactura($_POST['nroFca']);
+
 $usuario = unserialize($_SESSION['usuario']);
 
 $cs->bajaFactura($factura, $usuario);

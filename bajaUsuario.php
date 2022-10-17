@@ -5,4 +5,4 @@ require_once 'Usuario.php';
 
 $cs = new ControladorSesion();
 
-$cs->bajaUsuario($_SESSION['usuario']=unserialize($_SESSION['usuario']));
+$cs->bajaUsuario(unserialize($_SESSION['usuario']));
