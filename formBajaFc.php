@@ -11,3 +11,7 @@ $factura = $repo_Factura->verFactura($_POST['nroFca']);
 $usuario = unserialize($_SESSION['usuario']);
 
 $cs->bajaFactura($factura, $usuario);
+
+$redirigir = 'main.php?mensaje= Factura dada de baja con éxito' . $listado_facturas;
+header('Location: '.$redirigir);
+?>
