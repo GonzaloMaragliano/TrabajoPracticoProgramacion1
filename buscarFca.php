@@ -24,7 +24,7 @@
             }
             ?>
         <div class="u-align-center u-border-2 u-border-grey-75 u-form u-form-1">
-          <form action="formBuscarFc.php" method="POST" class="u-clearfix u-form-spacing-14 u-form-vertical u-inner-form" style="padding: 34px;" source="email" name="form">
+          <form action="buscarFca.php" method="POST" class="u-clearfix u-form-spacing-14 u-form-vertical u-inner-form" style="padding: 34px;" source="email" name="form">
           
             <div class="u-form-group u-label-left">
               <label for="text" class="u-custom-font u-font-arial u-label u-spacing-7 u-text-black u-label-2">Nombre del cliente</label>
@@ -55,38 +55,48 @@
               <col width="25%">
               <col width="25%">
             </colgroup>
-            
+            <?php
+              require_once "RepositorioFactura.php";
+
+              $repoFC = new RepositorioFactura();
+              
+              if(isset($_POST['NombreCliente'])){
+                $resultados = $repoFC->verFacturasCliente($_POST['NombreCliente']);
+                echo $resultados[0];
+              }
+              ?>
             <tbody class="u-table-body">
+
               <tr style="height: 64px;">
                 <td class="u-border-3 u-border-grey-30 u-table-cell u-table-cell-1">N° de Factura</td>
                 <td class="u-border-3 u-border-grey-30 u-table-cell u-table-cell-2">Nombre del cliente</td>
                 <td class="u-border-3 u-border-grey-30 u-table-cell u-table-cell-3">Fecha de carga</td>
                 <td class="u-border-3 u-border-grey-30 u-table-cell u-table-cell-4">Fecha de factura</td>
+                <td class="u-border-3 u-border-grey-30 u-table-cell u-table-cell-4">Bultos</td>
+                <td class="u-border-3 u-border-grey-30 u-table-cell u-table-cell-4">Observaciones</td>
               </tr>
-              <tr style="height: 65px;">
-                <td class="u-border-3 u-border-grey-30 u-table-cell">Columna 1</td>
-                <td class="u-border-3 u-border-grey-30 u-table-cell">Description</td>
-                <td class="u-border-3 u-border-grey-30 u-table-cell">Fecha</td>
-                <td class="u-border-3 u-border-grey-30 u-table-cell">Fecha</td>
-              </tr>
-              <tr style="height: 65px;">
-                <td class="u-border-3 u-border-grey-30 u-table-cell">Columna 2</td>
-                <td class="u-border-3 u-border-grey-30 u-table-cell">Description</td>
-                <td class="u-border-3 u-border-grey-30 u-table-cell">Fecha</td>
-                <td class="u-border-3 u-border-grey-30 u-table-cell">Fecha</td>
-              </tr>
-              <tr style="height: 65px;">
-                <td class="u-border-3 u-border-grey-30 u-table-cell">Columna 3</td>
-                <td class="u-border-3 u-border-grey-30 u-table-cell">Description</td>
-                <td class="u-border-3 u-border-grey-30 u-table-cell">Fecha</td>
-                <td class="u-border-3 u-border-grey-30 u-table-cell">Fecha</td>
-              </tr>
-              <tr style="height: 65px;">
-                <td class="u-border-3 u-border-grey-30 u-table-cell">Columna 4</td>
-                <td class="u-border-3 u-border-grey-30 u-table-cell">Description</td>
-                <td class="u-border-3 u-border-grey-30 u-table-cell">Fecha</td>
-                <td class="u-border-3 u-border-grey-30 u-table-cell">Fecha</td>
-              </tr>
+
+              <?php
+
+              if(isset($_POST['NombreCliente'])){
+                $repoFC = RepositorioFactura();
+                $resultados = $repoFC->verFacturasCliente($_POST['NombreCliente']);
+
+                for($i=1; $i<count($resultados); $i++){
+                  
+                  echo '<tr style="height: 65px;">
+                    <td class="u-border-3 u-border-grey-30 u-table-cell"> '.$resultados['nro_factura']->getId().'</td>
+                    <td class="u-border-3 u-border-grey-30 u-table-cell">Description</td>
+                    <td class="u-border-3 u-border-grey-30 u-table-cell">Fecha</td>
+                    <td class="u-border-3 u-border-grey-30 u-table-cell">Fecha</td>
+                    <td class="u-border-3 u-border-grey-30 u-table-cell">Fecha</td>
+                    <td class="u-border-3 u-border-grey-30 u-table-cell">Fecha</td>
+                  </tr>';
+                }
+
+              }
+
+            ?>
             </tbody>
           </table>
         </div>

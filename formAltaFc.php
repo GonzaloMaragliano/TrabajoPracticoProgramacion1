@@ -9,4 +9,7 @@ $fc = new Factura($_POST['nroFactura'],$_POST['NombreCliente'],$_POST['date'],$_
 
 $cs->altaFactura($fc, unserialize($_SESSION['usuario']));
 
+$redirigir = 'altaFca.php?mensaje= Factura dada de alta con éxito' ;
+header('Location: '.$redirigir);
+?>
 

@@ -22,14 +22,14 @@
         <p class="u-text u-text-body-alt-color u-text-default u-text-1">Trabajo Final Programacion I <span style="font-weight: 700;"></span>
         </p>
       </div></header>
-      
-            <?php
+
+      <?php
             if (isset( $_GET [ 'mensaje' ])) {
                 echo  '<div id="mensaje" class="alert alert-primary text-center">
                     <p>' . $_GET [ 'mensaje' ] . '</p></div>' ;
             }
             ?>
-      
+  
     <section class="u-align-center u-clearfix section1" id="sec-df0b">
       <div class="u-clearfix u-sheet u-sheet-1">
           <a href="bajaUsuario.php" class="u-border-none u-btn u-button-style u-palette-2-base u-btn-1">Baja Usuario</a>
