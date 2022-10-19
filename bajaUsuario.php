@@ -6,3 +6,6 @@ require_once 'Usuario.php';
 $cs = new ControladorSesion();
 
 $cs->bajaUsuario(unserialize($_SESSION['usuario']));
+
+session_destroy();
+header('Location: Inicio.php');

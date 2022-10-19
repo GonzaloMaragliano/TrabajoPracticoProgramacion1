@@ -15,9 +15,19 @@
         <p class="u-text u-text-body-alt-color u-text-default u-text-1">Trabajo Final Programacion I <span style="font-weight: 700;"></span>
         </p>
       </div></header>
+
     <section class="u-align-center u-clearfix u-white section1" id="sec-f6b4">
       <div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-text u-text-black u-text-default u-text-1">Alta de factura</p>
+
+        
+      <?php
+            if (isset( $_GET [ 'mensaje' ])) {
+                echo  '<div id="mensaje" class="alert alert-primary text-center">
+                    <p>' . $_GET [ 'mensaje' ] . '</p></div>' ;
+            }
+            ?>
+
         <div class="u-align-center u-border-2 u-border-grey-75 u-form u-form-1">
           <form action = "formAltaFc.php" method = "POST" class="u-clearfix u-form-spacing-14 u-form-vertical u-inner-form" style="padding: 34px;" source="email" name="form">
             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-left">

@@ -235,6 +235,57 @@
             
             return $listado_final;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // LLamada a la base de datos para ver todas las facturas asociadas a un cliente.
+        // Y la cantidad de coincidencias encontradas.
+
+        public function verFacturasCliente($nombre_cliente){
+
+            $q1 = "SELECT * FROM facturas WHERE cliente LIKE '%".$nombre_cliente."%'";
+            $q2 = "SELECT COUNT(*) as total FROM facturas WHERE cliente LIKE '%".$nombre_cliente."%'";
+
+            // Obtengo resultado de la consulta
+            $resultado1 = self::$conexion->query($q1);
+            $resultado2 = self::$conexion->query($q2);
+            $counter = $resultado2->fetch_assoc();
+
+
+            echo $counter['total'];
+            
+            /*while($fila = $resultado2->fetch_assoc()){
+                echo "<pre>";
+                var_dump($fila);
+                echo "</pre>";*;
+                
+            }*/
+            
+            $res = [];
+            while($fila = $resultado1->fetch_assoc()){
+                $fc = new Factura($fila['nro_factura'], $fila['cliente'], $fila['fecha_carga'], $fila['fecha_facturacion'], $fila['bultos'], $fila['observacion']);
+
+                array_unshift($res, $fc);
+            }
+
+            
+            return array_unshift($res, $counter);
+        }
 }
 
 

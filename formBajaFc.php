@@ -12,6 +12,6 @@ $usuario = unserialize($_SESSION['usuario']);
 
 $cs->bajaFactura($factura, $usuario);
 
-$redirigir = 'main.php?mensaje= Factura dada de baja con éxito' . $listado_facturas;
+$redirigir = 'Main.php?mensaje= Factura dada de baja con éxito' . $listado_facturas;
 header('Location: '.$redirigir);
 ?>
