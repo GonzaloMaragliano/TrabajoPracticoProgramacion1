@@ -267,14 +267,7 @@
             $counter = $resultado2->fetch_assoc();
 
 
-            echo $counter['total'];
-            
-            /*while($fila = $resultado2->fetch_assoc()){
-                echo "<pre>";
-                var_dump($fila);
-                echo "</pre>";*;
-                
-            }*/
+            $total = $counter['total'];
             
             $res = [];
             while($fila = $resultado1->fetch_assoc()){
@@ -283,8 +276,9 @@
                 array_unshift($res, $fc);
             }
 
-            
-            return array_unshift($res, $counter);
+            array_unshift($res, $total);
+
+            return $res;
         }
 }
 

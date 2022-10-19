@@ -1,3 +1,5 @@
+<?php session_start(); require_once "RepositorioFactura.php"; ?>  
+
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="es"><head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,12 +19,17 @@
     <section class="u-align-center u-clearfix u-white section1" id="sec-f6b4">
       <div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-text u-text-black u-text-default u-text-1">Buscar factura</p>
+
+        
         <?php
+
             if (isset( $_GET [ 'mensaje' ])) {
                 echo  '<div id="mensaje" class="alert alert-primary text-center">
                     <p>' . $_GET [ 'mensaje' ] . '</p></div>' ;
             }
-            ?>
+        ?>
+
+            
         <div class="u-align-center u-border-2 u-border-grey-75 u-form u-form-1">
           <form action="buscarFca.php" method="POST" class="u-clearfix u-form-spacing-14 u-form-vertical u-inner-form" style="padding: 34px;" source="email" name="form">
           
@@ -46,6 +53,22 @@
       </div>
     </section>
     <section class="u-align-center u-clearfix u-white u-section-2" id="sec-f29f">
+
+
+
+
+    <?php
+
+      $repoFC = new RepositorioFactura();
+
+      if(isset($_POST['NombreCliente'])){
+        $resultados = $repoFC->verFacturasCliente($_POST['NombreCliente']);
+        echo "<b>Total de coincidencias con el 'Nombre': ".$_POST['NombreCliente']." => ".$resultados[0]."</b>";
+      }
+    ?>
+
+
+
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-expanded-width u-table u-table-responsive u-table-1">
           <table class="u-table-entity u-table-entity-1">
@@ -55,16 +78,6 @@
               <col width="25%">
               <col width="25%">
             </colgroup>
-            <?php
-              require_once "RepositorioFactura.php";
-
-              $repoFC = new RepositorioFactura();
-              
-              if(isset($_POST['NombreCliente'])){
-                $resultados = $repoFC->verFacturasCliente($_POST['NombreCliente']);
-                echo $resultados[0];
-              }
-              ?>
             <tbody class="u-table-body">
 
               <tr style="height: 64px;">
@@ -79,24 +92,26 @@
               <?php
 
               if(isset($_POST['NombreCliente'])){
-                $repoFC = RepositorioFactura();
+
                 $resultados = $repoFC->verFacturasCliente($_POST['NombreCliente']);
 
                 for($i=1; $i<count($resultados); $i++){
                   
                   echo '<tr style="height: 65px;">
-                    <td class="u-border-3 u-border-grey-30 u-table-cell"> '.$resultados['nro_factura']->getId().'</td>
-                    <td class="u-border-3 u-border-grey-30 u-table-cell">Description</td>
-                    <td class="u-border-3 u-border-grey-30 u-table-cell">Fecha</td>
-                    <td class="u-border-3 u-border-grey-30 u-table-cell">Fecha</td>
-                    <td class="u-border-3 u-border-grey-30 u-table-cell">Fecha</td>
-                    <td class="u-border-3 u-border-grey-30 u-table-cell">Fecha</td>
+                    <td class="u-border-3 u-border-grey-30 u-table-cell"> '.$resultados[$i]->getNroFactura().'</td>
+                    <td class="u-border-3 u-border-grey-30 u-table-cell"> '.$resultados[$i]->getCliente().'</td>
+                    <td class="u-border-3 u-border-grey-30 u-table-cell"> '.$resultados[$i]->getFecha_Alta().'</td>
+                    <td class="u-border-3 u-border-grey-30 u-table-cell"> '.$resultados[$i]->getFechaFacturacion().'</td>
+                    <td class="u-border-3 u-border-grey-30 u-table-cell"> '.$resultados[$i]->getBultos().'</td>
+                    <td class="u-border-3 u-border-grey-30 u-table-cell"> '.$resultados[$i]->getObservacion().'</td>
                   </tr>';
                 }
 
               }
 
-            ?>
+              ?>
+
+
             </tbody>
           </table>
         </div>
